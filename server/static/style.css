@@ -1,6 +1,39 @@
+html,
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* spacer to push footer to bottom of page if page too short */
+.spacer {
+    flex: 1;
+}
+
+footer {
+    width: 100%;
+}
+
+.content {
+    padding: 90px;
+    text-align: center;
+}
+
+.bg-gradient {
+    background-image: linear-gradient(to right top, #001f3f, #093459, #154c73, #1f648e, #2a7ea9, #0d91b5, #00a4bc, #19b7bf, #4ec3a9, #83ca8f, #b7ce7c, #ebcd79);
+}
+
+.bg-whiteopacity {
+    background-color: rgba(245, 255, 250, 0.25);
+    box-shadow: 0px 0px 20px 20px rgba(245, 255, 250, .25);
+}
 
 .bg-navy {
     background-color: #001f3f;
+}
+
+.bg-blue {
+    background-color: #39a2cc;
 }
 
 .bg-teal {
