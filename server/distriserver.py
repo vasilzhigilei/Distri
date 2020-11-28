@@ -43,11 +43,23 @@ def on_leave(data):
     room = data['room']
     leave_room(room)
 
+@socketio.on('get')
+def getvalue(data):
+    room = data['room']
+    key = data['key']
+    value = rooms[room].dict[key]
+    emit('get response', value, room=request.sid)
+
+@socketio.on('set')
+def setvalue(data):
+
+
+# ROOM CLASS
+
 rooms = {}
 
 class Room:
     def __init__(self, code):
-        self.code = code
         self.connections = 0
         self.dict = {}
 
