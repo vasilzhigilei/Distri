@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: Verdana;
 }
 
 /* spacer to push footer to bottom of page if page too short */
@@ -13,7 +14,7 @@ body {
 .mini-spacer {
     width: 100%;
     height: 1px;
-    background: rgba(255, 255, 255, 0.44);
+    background: rgba(255, 255, 255, 0.5);
     background-blend-mode: overlay;
 }
 
@@ -21,9 +22,13 @@ footer {
     width: 100%;
 }
 
-.content {
-    padding: 90px;
+.insidecontent {
+    border: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
     text-align: center;
+    padding: 40px;
 }
 
 .bg-gradient {
@@ -33,7 +38,6 @@ footer {
 .bg-whiteopacity {
     background-color: rgba(255, 255, 255, 0.08);
     background-blend-mode: overlay;
-    /* apply filter like so filter: url("#turbulence");*/
 } 
 
 .bg-navy {
@@ -68,4 +72,10 @@ footer {
     font-size: 80px;
     color: white;
     margin: auto;
+    text-decoration: none;
+}
+
+.header:hover {
+    color: white;
+    text-decoration: none;
 }
