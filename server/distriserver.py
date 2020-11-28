@@ -33,7 +33,7 @@ def room(code):
     # maybe return true bool for programatic connections to room
     return render_template('room.html', code=code, room=rooms[code].dict)
 
-@socketio.on('join')
+"""@socketio.on('join')
 def on_join(data):
     room = data['room']
     join_room(room)
@@ -41,18 +41,21 @@ def on_join(data):
 @socketio.on('leave')
 def on_leave(data):
     room = data['room']
-    leave_room(room)
+    leave_room(room)"""
 
 @socketio.on('get')
 def getvalue(data):
-    room = data['room']
+    code = data['code']
     key = data['key']
-    value = rooms[room].dict[key]
+    value = rooms[code].dict[key]
     emit('get response', value, room=request.sid)
 
 @socketio.on('set')
 def setvalue(data):
-
+    code = data['code']
+    key = data['key']
+    value = data['value']
+    rooms[code].dict[key] = value
 
 # ROOM CLASS
 
