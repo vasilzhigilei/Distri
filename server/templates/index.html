@@ -4,7 +4,17 @@
     <div class="row" style="margin-top: 10vh">
         <div class="col-md-4"></div>
         <div class="col-md-4 insidecontent bg-whiteopacity">
-            <h3>Already have a link?</h3>
+            <h3>Create a new room?</h3>
+            <button type="button" class="btn btn-info" onclick="generate()">Generate</button>
+            <script>
+                function generate(){
+                    fetch("/api/generateroom").then(function(response) {
+                        response.text().then(function(text) {
+                            window.location.href = "/r/" + text; // redirect to new room
+                        });
+                    });
+                };
+            </script>
         </div>
         <div class="col-md-4"></div>
     </div>
