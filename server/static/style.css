@@ -59,3 +59,13 @@ footer {
 .bg-lightgray {
     background-color: #f8f9fa;
 }
+
+.akronim {
+    font-family: Akronim;
+}
+
+.header {
+    font-size: 80px;
+    color: white;
+    margin: auto;
+}
