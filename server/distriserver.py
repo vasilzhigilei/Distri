@@ -28,7 +28,7 @@ def room(code):
     # do room logic here
     # return html render if from browser
     # maybe return true bool for programatic connections to room
-    return None
+    return code
 
 rooms = {}
 
