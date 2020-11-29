@@ -119,3 +119,45 @@ footer {
     color: #009879;
   }
   
+  .btn-custom { 
+    color: #ffffff; 
+    background-color: #00B386; 
+  } 
+   
+  .btn-custom:hover, 
+  .btn-custom:focus, 
+  .btn-custom:active, 
+  .btn-custom.active, 
+  .open .dropdown-toggle.btn-custom { 
+    color: #ffffff; 
+    background-color: #009C75; 
+  } 
+   
+  .btn-custom:active, 
+  .btn-custom.active, 
+  .open .dropdown-toggle.btn-custom { 
+    background-image: none; 
+  } 
+   
+  .btn-custom.disabled, 
+  .btn-custom[disabled], 
+  fieldset[disabled] .btn-custom, 
+  .btn-custom.disabled:hover, 
+  .btn-custom[disabled]:hover, 
+  fieldset[disabled] .btn-custom:hover, 
+  .btn-custom.disabled:focus, 
+  .btn-custom[disabled]:focus, 
+  fieldset[disabled] .btn-custom:focus, 
+  .btn-custom.disabled:active, 
+  .btn-custom[disabled]:active, 
+  fieldset[disabled] .btn-custom:active, 
+  .btn-custom.disabled.active, 
+  .btn-custom[disabled].active, 
+  fieldset[disabled] .btn-custom.active { 
+    background-color: #00B386; 
+  } 
+   
+  .btn-custom .badge { 
+    color: #00B386; 
+    background-color: #ffffff; 
+  }
