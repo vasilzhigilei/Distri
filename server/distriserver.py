@@ -23,21 +23,23 @@ def generateroom():
     Generates a new room
     """
     newcode = secrets.token_urlsafe(4)
-    rooms[newcode] = Room(newcode)
-    rooms[newcode].dict['test'] = 123
+    ROOMS[newcode] = {}
+    ROOMS[newcode].dict['test'] = 123
     return newcode
 
 @app.route('/r/<path:code>')
-def room(code):
+def room(room):
     # do room logic here
     # return html render if from browser
     # maybe return true bool for programatic connections to room
-    return render_template('room.html', code=code, room=rooms[code].dict)
+    return render_template('room.html', room=room)
 
 @socketio.on('join')
 def on_join(data):
     room = data['room']
-    join_room(room)
+    if room in ROOMS:
+        join_room(room)
+        emit('join response', ROOMS[room], room=request.sid) # send response with room dict back to client
 
 @socketio.on('leave')
 def on_leave(data):
@@ -53,18 +55,18 @@ def getvalue(data):
 
 @socketio.on('set')
 def setvalue(data):
-    code = data['code']
+    room = data['room']
     key = data['key']
     value = data['value']
-    rooms[code].dict[key] = value
-    emit('updated data', {key:value}, room=code)
+    ROOMS[room].dict[key] = value
+    emit('updated data', {key:value}, room=room)
 
 # ROOM CLASS
-rooms = {}
-class Room:
+ROOMS = {}
+"""class Room:
     def __init__(self, code):
         self.connections = 0
-        self.dict = {}
+        self.dict = {}"""
 
 if __name__ == '__main__':
     socketio.run(app)
