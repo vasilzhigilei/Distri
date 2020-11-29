@@ -91,7 +91,7 @@ footer {
   }
   
   .content-table thead tr {
-    background-color: #009872;
+    background-color: #009C75;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
@@ -111,12 +111,12 @@ footer {
   }
   
   .content-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009872;
+    border-bottom: 2px solid #009C75;
   }
   
   .content-table tbody tr.active-row {
     font-weight: bold;
-    color: #009879;
+    color: #009C75;
   }
   
   .btn-custom { 

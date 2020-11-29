@@ -11,7 +11,8 @@
             <h4>Already have a code?</h4>
             <form>
                 <div class="form-group">
-                    <input type="text" id="code" class="form-control" style="width: 75%; margin: auto;" aria-describedby="codeHelp" placeholder="Enter code">
+                    <input type="text" id="code" class="form-control" style="width: 75%; margin: auto;" aria-describedby="codeHelp" placeholder="Enter code"
+                        onkeypress="detect_enter_keyboard(event)">
                     <small id="codeHelp" class="form-text">If you were given a URL code.</small>
                 </div>
                 <button type="button" class="btn btn-custom" onclick="redirect(document.getElementById('code').value)">Submit</button>
@@ -23,9 +24,16 @@
                             redirect(text);
                         });
                     });
-                };
+                }
                 function redirect(code){
                     window.location.href = "/r/" + code; // redirect to new room
+                }
+                function detect_enter_keyboard(event) {
+                    var key_board_keycode = event.which || event.keyCode;
+                    if(key_board_keycode == 13){
+                        event.preventDefault();
+                        redirect(document.getElementById('code').value);
+                    }
                 }
             </script>
         </div>
