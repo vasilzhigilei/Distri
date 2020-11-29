@@ -86,8 +86,9 @@ footer {
     font-size: 0.9em;
     width: 100%;
     border-radius: 5px 5px 0 0;
-    overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    table-layout: fixed;
+    word-break: break-all;
   }
   
   .content-table thead tr {
@@ -101,13 +102,13 @@ footer {
   .content-table td {
     padding: 12px 15px;
   }
-  
+
   .content-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #009c7531;
   }
   
   .content-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    background-color: #009c7531;
   }
   
   .content-table tbody tr:last-of-type {
