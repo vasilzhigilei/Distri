@@ -5,7 +5,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-4 insidecontent bg-whiteopacity">
             <h4>Create a new room?</h4>
-            <button type="button" class="btn btn-info" onclick="generate()">Generate</button>
+            <button type="button" class="btn btn-custom" onclick="generate()">Generate</button>
             <br>
             <br>
             <h4>Already have a code?</h4>
@@ -14,7 +14,7 @@
                     <input type="text" id="code" class="form-control" style="width: 75%; margin: auto;" aria-describedby="codeHelp" placeholder="Enter code">
                     <small id="codeHelp" class="form-text">If you were given a URL code.</small>
                 </div>
-                <button type="button" class="btn btn-info" onclick="redirect(document.getElementById('code').value)">Submit</button>
+                <button type="button" class="btn btn-custom" onclick="redirect(document.getElementById('code').value)">Submit</button>
             </form>
             <script>
                 function generate(){

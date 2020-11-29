@@ -4,16 +4,26 @@
     <div class="row" style="margin-top: 10vh">
         <div class="col-md-4"></div>
         <div class="col-md-4 insidecontent bg-whiteopacity">
-            <h4>{{ code }}</h4>
-            <table>
+            <h3>{{ code }}</h3>
+            <small id="codeHelp" class="form-text">Room URL code.</small>
+            <br>
+            <h4>Room Contents</h4>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                      <th style="width: 33%;">Key</th>
+                      <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for key, value in room.items() %}
                    <tr>
                         <th> {{ key }} </th>
                         <td> {{ value }} </td>
                    </tr>
                 {% endfor %}
-            </table>
-            
+                </tbody>
+            </table>      
         </div>
         <div class="col-md-4"></div>
     </div>
