@@ -25,7 +25,6 @@ def generateroom():
     """
     room = secrets.token_urlsafe(4)
     ROOMS[room] = {}
-    ROOMS[room]['test'] = 123
     return room
 
 @app.route('/r/<path:room>')
@@ -45,7 +44,7 @@ def on_join(data):
     room = data['room']
     if room in ROOMS:
         join_room(room)
-        emit('join response', {'data':ROOMS[room]}, room=request.sid) # send response with room dict back to client
+        emit('join response', ROOMS[room], room=request.sid) # send response with room dict back to client
 
 @socketio.on('leave')
 def on_leave(data):
@@ -57,7 +56,7 @@ def setvalue(data):
     room = data['room']
     key = data['key']
     value = data['value']
-    ROOMS[room].dict[key] = value
+    ROOMS[room][key] = value #keyerror here if room doesn't exist
     emit('updated data', {key:value}, room=room)
 
 # ROOM CLASS
