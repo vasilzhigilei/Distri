@@ -11,6 +11,7 @@ app.config.update(
 
 # initialize socketio
 socketio = SocketIO(app)
+socketio.init_app(app, cors_allowed_origins="*")
 
 @app.route('/')
 @app.route('/index')
@@ -22,17 +23,22 @@ def generateroom():
     """
     Generates a new room
     """
-    newcode = secrets.token_urlsafe(4)
-    ROOMS[newcode] = {}
-    ROOMS[newcode].dict['test'] = 123
-    return newcode
+    room = secrets.token_urlsafe(4)
+    ROOMS[room] = {}
+    ROOMS[room]['test'] = 123
+    return room
 
-@app.route('/r/<path:code>')
+@app.route('/r/<path:room>')
 def room(room):
     # do room logic here
     # return html render if from browser
     # maybe return true bool for programatic connections to room
     return render_template('room.html', room=room)
+
+# Handler for a message recieved over 'connect' channel
+@socketio.on('connect')
+def test_connect():
+    socketio.emit('something',  {'data':'Lets dance'})
 
 @socketio.on('join')
 def on_join(data):
@@ -69,4 +75,4 @@ ROOMS = {}
         self.dict = {}"""
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, debug=True)

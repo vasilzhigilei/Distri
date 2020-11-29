@@ -4,7 +4,7 @@
     <div class="row" style="margin-top: 10vh">
         <div class="col-md-4"></div>
         <div class="col-md-4 insidecontent bg-whiteopacity">
-            <h3 style="font-weight: bold;">{{ code }}</h3>
+            <h3 style="font-weight: bold;">{{ room }}</h3>
             <small id="codeHelp" class="form-text">Room URL code.</small>
             <br>
             <h4>Room Contents</h4>
@@ -16,16 +16,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for key, value in roomdict.items() %}
-                   <tr>
-                        <th> {{ key }} </th>
-                        <td> {{ value }} </td>
-                   </tr>
-                {% endfor %}
                 </tbody>
             </table>      
-            <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
             <script src="../static/scripts/networking.js"></script>
+            <script src="../static/scripts/initialize.js"></script>
         </div>
         <div class="col-md-4"></div>
     </div>
