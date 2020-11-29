@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, request
 from flask import render_template
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit, send, join_room, leave_room
 import secrets
 
 # initialize Flask app
@@ -38,26 +38,19 @@ def room(room):
 # Handler for a message recieved over 'connect' channel
 @socketio.on('connect')
 def test_connect():
-    socketio.emit('something',  {'data':'Lets dance'})
+    emit('confirm',  {'data':'Connected client: ' + request.sid})
 
 @socketio.on('join')
 def on_join(data):
     room = data['room']
     if room in ROOMS:
         join_room(room)
-        emit('join response', ROOMS[room], room=request.sid) # send response with room dict back to client
+        emit('join response', {'data':ROOMS[room]}, room=request.sid) # send response with room dict back to client
 
 @socketio.on('leave')
 def on_leave(data):
     room = data['room']
     leave_room(room)
-
-"""@socketio.on('get')
-def getvalue(data):
-    code = data['code']
-    key = data['key']
-    value = rooms[code].dict[key]
-    emit('get response', value, room=request.sid)"""
 
 @socketio.on('set')
 def setvalue(data):
