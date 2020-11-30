@@ -10,7 +10,7 @@ app.config.update(
 )
 
 # initialize socketio
-socketio = SocketIO(app)
+socketio = SocketIO(app, transport='websocket')
 socketio.init_app(app, cors_allowed_origins="*")
 
 @app.route('/')
