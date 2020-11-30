@@ -8,12 +8,16 @@ class DistriClient:
             pass
         self.room = room
         self.debug = debug
-        self.tableData = {}
+        self._data = {} # discouraged use _
         sio = socketio.Client()
-        sio.connect('http://localhost:5000')
+        sio.connect(url)
 
         # join room
         sio.emit('join', {'room': self.room})
+
+    @property
+    def data(self):
+        return self._data
 
     def set(key, value):
         sio.emit('set', {'room':self.room, 'key':key, 'value':value})
@@ -25,10 +29,10 @@ class DistriClient:
     @sio.on('join response')
     def __joinresponse(data):
         print("join response with room data: ", data)
-        tableData = data
+        self._data = data
 
     @sio.on('updated data')
     def __updateddata(data):
         for key in data:
-            tableData[key] = data[key]
+            self._data[key] = data[key]
 
