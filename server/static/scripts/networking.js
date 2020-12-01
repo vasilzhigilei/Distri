@@ -1,5 +1,5 @@
 // NETWORKING AND SOCKETIO CODE FOR room.html
-var socket = io({'transports': ['websocket']});
+var socket = io();
 
 socket.on('confirm', function(data) {
     console.log(data);
