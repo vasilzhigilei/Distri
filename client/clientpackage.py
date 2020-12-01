@@ -1,5 +1,6 @@
 import socketio
 import urllib.request
+import time
 
 class DistriClient:
     global sio
@@ -7,36 +8,49 @@ class DistriClient:
     def __init__(self, url, room="", debug=False):
         self.url = url
         if room == "":
-            self.room = self.generate(url)
+            self.room = self.__generate(url)
         self.room = room
-        self.debug = debug
+        self.DEBUG = debug
         self._data = {} # discouraged use _
+        self.connected = False
         
-        sio.on('confirm', self.confirm)
-        sio.on('join response', self.joinresponse)
-        sio.on('updated data', self.updateddata)
+        sio.on('CONFIRM', self.__confirm)
+        sio.on('JOINED', self.__joined)
+        sio.on('UPDATE', self.__update)
         sio.connect(url)
         
-        sio.emit('join', {'room': self.room})
+        sio.emit('JOIN', {'room': self.room})
+        for i in range(5):
+            time.sleep(1)
+            if(self.connected):
+                return
+        print("Joining room failed, closing connection")
+        sio.disconnect()
+
 
     @property
     def data(self):
         return self._data
 
     def set(self, key, value):
-        self.sio.emit('set', {'room':self.room, 'key':key, 'value':value})
+        sio.emit('SET', {'room':self.room, 'key':key, 'value':value})
 
-    def confirm(self, data):
-        print(data)
+    def __confirm(self, data):
+        self.log("CONFIRM RESPONSE: " + str(data))
 
-    def joinresponse(self, data):
-        print("join response with room data: ", data)
+    def __joined(self, data):
+        self.log("JOINED RESPONSE: " + str(data))
         self._data = data
+        self.connected = True
 
-    def updateddata(self, data):
+    def __update(self, data):
+        self.log("UPDATE RESPONSE: " + str(data))
         for key in data:
             self._data[key] = data[key]
     
-    def generate(self, url):
+    def __generate(self, url):
         return urllib.request.urlopen(url + "/api/generateroom").read()
 
+    def log(self, s):
+        if self.DEBUG:
+            print(s)

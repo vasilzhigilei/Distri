@@ -37,27 +37,27 @@ def room(room):
 # Handler for a message recieved over 'connect' channel
 @socketio.on('connect')
 def test_connect():
-    emit('confirm',  {'data':'Connected client: ' + request.sid})
+    emit('CONFIRM',  {'data':'Connected client: ' + request.sid})
 
-@socketio.on('join')
+@socketio.on('JOIN')
 def on_join(data):
     room = data['room']
     if room in ROOMS:
         join_room(room)
-        emit('join response', ROOMS[room], room=request.sid) # send response with room dict back to client
+        emit('JOINED', ROOMS[room], room=request.sid) # send response with room dict back to client
 
 @socketio.on('leave')
 def on_leave(data):
     room = data['room']
     leave_room(room)
 
-@socketio.on('set')
+@socketio.on('SET')
 def setvalue(data):
     room = data['room']
     key = data['key']
     value = data['value']
     ROOMS[room][key] = value #keyerror here if room doesn't exist
-    emit('updated data', {key:value}, room=room)
+    emit('UPDATE', {key:value}, room=room)
 
 # ROOM CLASS
 ROOMS = {}

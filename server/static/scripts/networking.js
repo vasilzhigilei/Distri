@@ -1,17 +1,17 @@
 // NETWORKING AND SOCKETIO CODE FOR room.html
 var socket = io();
 
-socket.on('confirm', function(data) {
+socket.on('CONFIRM', function(data) {
     console.log(data);
 });
 
-socket.on('join response', function(data) {
+socket.on('JOINED', function(data) {
     tableData = data;
     setTable();
-    console.log("join response with room data: ", data);
+    console.log("JOINED: ", data);
 });
 
-socket.on('updated data', function(data) {
+socket.on('UPDATE', function(data) {
     for (var key in data){
         tableData[key] = data[key]
     }
