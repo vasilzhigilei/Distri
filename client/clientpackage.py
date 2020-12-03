@@ -9,7 +9,8 @@ class DistriClient:
         self.url = url
         if room == "":
             self.room = self.__generate(url)
-        self.room = room
+        else:
+            self.room = room
         self.DEBUG = debug
         self._data = {} # discouraged use _
         self.connected = False
@@ -49,8 +50,8 @@ class DistriClient:
             self._data[key] = data[key]
     
     def __generate(self, url):
-        return urllib.request.urlopen(url + "/api/generateroom").read()
+        return urllib.request.urlopen(url + "/api/generateroom").read().decode('UTF-8')
 
     def log(self, s):
         if self.DEBUG:
-            print(s)
+            print("[DISTRI] " + s)

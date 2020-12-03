@@ -1,6 +1,6 @@
 import clientpackage
 
-client = clientpackage.DistriClient('http://127.0.0.1:5000', room="6fIZpg")
+client = clientpackage.DistriClient('http://127.0.0.1:5000')
 
 for i in range(50):
     if i == 25:
