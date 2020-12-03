@@ -13,10 +13,12 @@ app.config.update(
 socketio = SocketIO(app)
 socketio.init_app(app, cors_allowed_origins="*")
 
+metadata = {'count':0}
+
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', metadata=metadata)
 
 @app.route('/api/generateroom')
 def generateroom():
@@ -36,8 +38,14 @@ def room(room):
 
 # Handler for a message recieved over 'connect' channel
 @socketio.on('connect')
-def test_connect():
-    emit('CONFIRM',  {'data':'Connected client: ' + request.sid})
+def connect():
+    metadata['count'] += 1
+    print('Connected client #' + str(metadata['count']) + ': ' + request.sid)
+
+@socketio.on('disconnect')
+def disconnect():
+    print('Disconnected client #' + str(metadata['count']) + ': ' + request.sid)
+    metadata['count'] -= 1
 
 @socketio.on('JOIN')
 def on_join(data):
@@ -67,4 +75,4 @@ ROOMS = {}
         self.dict = {}"""
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=False)

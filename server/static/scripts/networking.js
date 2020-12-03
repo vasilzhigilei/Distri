@@ -1,10 +1,6 @@
 // NETWORKING AND SOCKETIO CODE FOR room.html
 var socket = io();
 
-socket.on('CONFIRM', function(data) {
-    console.log(data);
-});
-
 socket.on('JOINED', function(data) {
     tableData = data;
     setTable();

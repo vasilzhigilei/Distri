@@ -15,7 +15,6 @@ class DistriClient:
         self._data = {} # discouraged use _
         self.connected = False
         
-        sio.on('CONFIRM', self.__confirm)
         sio.on('JOINED', self.__joined)
         sio.on('UPDATE', self.__update)
         sio.connect(url)
@@ -35,9 +34,6 @@ class DistriClient:
 
     def set(self, key, value):
         sio.emit('SET', {'room':self.room, 'key':key, 'value':value})
-
-    def __confirm(self, data):
-        self.log("CONFIRM RESPONSE: " + str(data))
 
     def __joined(self, data):
         self.log("JOINED RESPONSE: " + str(data))
