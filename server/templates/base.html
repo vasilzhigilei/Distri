@@ -44,6 +44,17 @@
 
     <!-- FOOTER START -->
     <div class="spacer"></div>
+    <div class="container">
+        <div class="row" style="margin-top: 2vh; margin-bottom: 2vh;">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 metainfo bg-whiteopacity">
+                <h4>Connected Clients: {{ metadata.count }}</h4>
+                <h4>Browser: {{ metadata.browser }}</h4>
+                <h4>Python: {{ metadata.python }}</h4>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
     <div class="mini-spacer"></div> <!-- mini-spacer -->
     <footer class="font-small text-light bg-whiteopacity">
         <div class="footer-copyright text-center py-3">

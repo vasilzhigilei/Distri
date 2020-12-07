@@ -36,7 +36,7 @@ def room(room):
     # do room logic here
     # return html render if from browser
     # maybe return true bool for programatic connections to room
-    return render_template('room.html', room=room)
+    return render_template('room.html', room=room, metadata=metadata)
 
 # Handler for a message recieved over 'connect' channel
 @socketio.on('connect')
