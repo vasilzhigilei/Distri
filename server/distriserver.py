@@ -1,6 +1,8 @@
 from flask import Flask, request
 from flask import render_template
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
+
+from user_agents import parse
 import secrets
 
 # initialize Flask app
@@ -13,7 +15,7 @@ app.config.update(
 socketio = SocketIO(app)
 socketio.init_app(app, cors_allowed_origins="*")
 
-metadata = {'count':0}
+metadata = {'count':0,'browser':0,'python':0,'unknown':0}
 
 @app.route('/')
 @app.route('/index')
@@ -39,12 +41,28 @@ def room(room):
 # Handler for a message recieved over 'connect' channel
 @socketio.on('connect')
 def connect():
+    user_agent = parse(request.headers.get('User-Agent'))
+    browser = user_agent.browser.family
+    if browser == "Python Requests":
+        metadata['python'] += 1
+    else:
+        metadata['browser'] += 1
+        #in the future, add unknown, and do checks if really browser
+        #print(user_agent.is_mobile, user_agent.is_pc, user_agent.is_bot)
     metadata['count'] += 1
+    print(metadata)
     print('Connected client #' + str(metadata['count']) + ': ' + request.sid)
 
 @socketio.on('disconnect')
 def disconnect():
     print('Disconnected client #' + str(metadata['count']) + ': ' + request.sid)
+    user_agent = parse(request.headers.get('User-Agent'))
+    browser = user_agent.browser.family
+    os = user_agent.os.family
+    if browser == "Python Requests":
+        metadata['python'] -= 1
+    else:
+        metadata['browser'] -= 1
     metadata['count'] -= 1
 
 @socketio.on('JOIN')
