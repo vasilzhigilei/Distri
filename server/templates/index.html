@@ -5,8 +5,8 @@
         <div class="col-0 col-lg-2 col-xl-4"></div>
         <div class="col-12 col-lg-8 col-xl-4 insidecontent bg-whiteopacity">
             <h4>Create a new room?</h4>
-            <div class="buttoncontainer">
-                <button type="button" onclick="generate()">
+            <div class="buttoncontainer" onclick="generate()">
+                <button type="button">
                     Generate
                     <div class="fill"></div>
                 </button>
@@ -20,8 +20,8 @@
                         onkeypress="detect_enter_keyboard(event)">
                     <small id="codeHelp" class="form-text">If you were given a URL code.</small>
                 </div>
-                <div class="buttoncontainer">
-                    <button type="button" onclick="redirect(document.getElementById('code').value)">
+                <div class="buttoncontainer" onclick="redirect(document.getElementById('code').value)">
+                    <button type="button">
                         Join
                         <div class="fill fill-two"></div>
                     </button>

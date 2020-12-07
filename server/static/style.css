@@ -46,6 +46,21 @@ h4 {
   display: inline;
 }
 
+.metatext {
+  vertical-align: middle;
+}
+
+.icondetails:after{
+  content: "]";
+  font-size: 2vh;
+  vertical-align: middle;
+}
+.icondetails:before{
+  content:"[";
+  font-size: 2vh;
+  vertical-align: middle;
+}
+
 .mini-spacer {
   margin-left: auto;
   margin-right: auto;
@@ -70,7 +85,9 @@ footer {
 
 .bg-gradient {
     background-image: linear-gradient(to right top, #dd8ae9, #ad9fff, #74b1ff, #35bdff, #00c6ef, #00cde2, #2bd3d1, #55d7be, #71deb1, #8ee4a2, #ade895, #cdeb8a);
-}
+    animation: gradient 15s ease infinite;
+    background-size: 120% 100%;
+  }
 
 .bg-whiteopacity {
     background-color: rgba(255, 255, 255, 0.08);
