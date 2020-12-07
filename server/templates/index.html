@@ -5,7 +5,12 @@
         <div class="col-0 col-lg-2 col-xl-4"></div>
         <div class="col-12 col-lg-8 col-xl-4 insidecontent bg-whiteopacity">
             <h4>Create a new room?</h4>
-            <button type="button" class="btn btn-custom" onclick="generate()">Generate</button>
+            <div class="buttoncontainer">
+                <button type="button" onclick="generate()">
+                    Generate
+                    <div class="fill"></div>
+                </button>
+            </div>
             <br>
             <br>
             <h4>Already have a code?</h4>
@@ -15,7 +20,12 @@
                         onkeypress="detect_enter_keyboard(event)">
                     <small id="codeHelp" class="form-text">If you were given a URL code.</small>
                 </div>
-                <button type="button" class="btn btn-custom" onclick="redirect(document.getElementById('code').value)">Submit</button>
+                <div class="buttoncontainer">
+                    <button type="button" onclick="redirect(document.getElementById('code').value)">
+                        Join
+                        <div class="fill fill-two"></div>
+                    </button>
+                </div>
             </form>
             <script>
                 function generate(){
