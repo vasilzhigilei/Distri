@@ -16,8 +16,20 @@ body {
   color: white;
   border: 1px;
   border-style: solid;
+  border-radius: 100px;
   border-color: rgba(255, 255, 255, 0.5);
-  padding: 20px;
+  padding: 7px;
+}
+
+.icon {
+  height: 3vh;
+  min-height: 30px;
+}
+
+.iconcontainer {
+  margin-left: 1vh;
+  margin-right: 1vh;
+  display: inline;
 }
 
 .mini-spacer {

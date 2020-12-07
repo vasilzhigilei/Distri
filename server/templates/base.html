@@ -48,9 +48,9 @@
         <div class="row" style="margin-top: 2vh; margin-bottom: 2vh;">
             <div class="col-md-2"></div>
             <div class="col-md-8 metainfo bg-whiteopacity">
-                <h4>Connected Clients: {{ metadata.count }}</h4>
-                <h4>Browser: {{ metadata.browser }}</h4>
-                <h4>Python: {{ metadata.python }}</h4>
+                <div class="iconcontainer"><img src="../static/icons/people.svg" class="icon"> {{ metadata.count }}</div>
+                <div class="iconcontainer"><img src="../static/icons/pc.svg" class="icon"> {{ metadata.browser }}</div>
+                <div class="iconcontainer"><img src="../static/icons/chip.svg" class="icon"> {{ metadata.python }}</div>
             </div>
             <div class="col-md-2"></div>
         </div>
