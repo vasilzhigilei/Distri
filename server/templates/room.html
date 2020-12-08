@@ -4,7 +4,12 @@
     <div class="row" style="margin-top: 10vh">
         <div class="col-1 col-sm-2 col-lg-3"></div>
         <div class="col-10 col-sm-8 col-lg-6 insidecontent bg-whiteopacity">
-            <h3 id="room" style="font-weight: bold;">{{ room }}</h3>
+            <div class="input-group" style="width: 50%; margin: auto;">
+                <input class="form-control" value="{{ room }}" type="text" id="room" style="font-weight: bold;" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button"><img src="../static/icons/clipboard.svg" height="100%"></button>
+                </div>
+            </div>
             <small id="codeHelp" class="form-text">Room URL code.</small>
             <br>
             <h4>Room Contents</h4>

@@ -184,7 +184,7 @@ footer {
     z-index: 10;
   }
   
-  button {
+  .indexbutton {
     position: relative;
     height: 50px;
     width: 280px;

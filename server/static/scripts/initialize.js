@@ -1,5 +1,5 @@
 // INITIALIZE SOCKETIO CONNECTION WITH SERVER
-room = document.getElementById("room").textContent;
+room = document.getElementById("room").value;
 
 socket.emit('JOIN', {'room': room});
 
