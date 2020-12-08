@@ -48,6 +48,7 @@ h4 {
 
 .metatext {
   vertical-align: middle;
+  font-weight: bold;
 }
 
 .icondetails:after{
@@ -86,7 +87,7 @@ footer {
 .bg-gradient {
     background-image: linear-gradient(to right top, #dd8ae9, #ad9fff, #74b1ff, #35bdff, #00c6ef, #00cde2, #2bd3d1, #55d7be, #71deb1, #8ee4a2, #ade895, #cdeb8a);
     animation: gradient 15s ease infinite;
-    background-size: 120% 100%;
+    background-size: 200% 100%;
   }
 
 .bg-whiteopacity {
@@ -180,6 +181,7 @@ footer {
     width: 300px;
     margin: 0 auto;
     cursor: pointer;
+    z-index: 10;
   }
   
   button {
@@ -192,7 +194,7 @@ footer {
     font-size: 1.1em;
     letter-spacing: 0.2em;
     overflow: hidden;
-    box-shadow: 0 4px 12px 0 rgba(152, 160, 180, 10);
+    box-shadow: 0 4px 12px 0 rgba(54, 21, 21, 0.3);
     z-index: -2;
   }
 
