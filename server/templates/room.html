@@ -2,14 +2,14 @@
 
 {% block content %}
     <div class="row" style="margin-top: 10vh">
-        <div class="col-1 col-sm-2 col-lg-3"></div>
-        <div class="col-10 col-sm-8 col-lg-6 insidecontent bg-whiteopacity">
-            <div class="input-group" style="width: 50%; margin: auto;">
+        <div class="col-0 col-lg-2 col-xl-3"></div>
+        <div class="col-12 col-lg-8 col-xl-6 insidecontent bg-whiteopacity">
+            <div class="input-group input-group-lg" style="width: 50%; margin: auto;">
                 <input class="form-control" value="{{ room }}" type="text" id="room" style="font-weight: bold;" readonly>
                 <div class="input-group-append">
                     <button id="copy-button" class="btn btn-outline-secondary" data-clipboard-target="#room" type="button">
                         <img src="../static/icons/clipboard.svg" class="copyimage" alt="Copy to clipboard">
-                    </button>
+                    </button> <!-- possible bug with inspect element changing size exiting copy button svg size -->
                 </div>
             </div>
             <small id="codeHelp" class="form-text">Room URL code.</small>
@@ -36,6 +36,6 @@
             <script src="../static/scripts/sorttable.js"></script>
             <script src="../static/scripts/clipboard.js"></script>
         </div>
-        <div class="col-1 col-sm-2 col-lg-3"></div>
+        <div class="col-0 col-lg-2 col-xl-3"></div>
     </div>
 {% endblock %}
