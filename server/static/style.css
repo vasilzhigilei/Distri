@@ -82,6 +82,7 @@ footer {
     color: white;
     text-align: center;
     padding: 40px;
+    border-radius: 10px;
 }
 
 .bg-gradient {

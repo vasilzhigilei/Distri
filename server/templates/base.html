@@ -21,6 +21,9 @@
     
     <!-- style.css -->
     <link rel="stylesheet" href="../static/style.css" />
+
+    <!-- sitewide.js -->
+    <script src="../static/scripts/sitewide.js"></script>
 </head>
 <body class="bg-gradient">
     <!-- NAVBAR START -->
@@ -51,16 +54,16 @@
                 <span class="metatext">
                     Sitewide Connections &mdash;
                 </span>
-                <div class="iconcontainer">
+                <div class="iconcontainer" data-toggle="tooltip" title="Total Connections">
                     <img src="../static/icons/people.svg" class="icon">
                     <span class="metatext">{{ metadata.count }}</span>
                 </div>
                 <span class="icondetails">
-                    <div class="iconcontainer">
+                    <div class="iconcontainer" data-toggle="tooltip" title="Browser Connections">
                         <img src="../static/icons/pc.svg" class="icon">
                         <span class="metatext">{{ metadata.browser }}</span>
                     </div>
-                    <div class="iconcontainer">
+                    <div class="iconcontainer" data-toggle="tooltip" title="Python Connections">
                         <img src="../static/icons/chip.svg" class="icon">
                         <span class="metatext">{{ metadata.python }}</span>
                     </div>
