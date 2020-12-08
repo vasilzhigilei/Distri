@@ -8,42 +8,44 @@ class DistriClient:
     def __init__(self, url, room="", debug=False):
         self.url = url
         if room == "":
-            self.room = self.__generate(url)
+            self.__room = self.__generate(url)
         else:
-            self.room = room
+            self.__room = room
         self.DEBUG = debug
-        self._data = {} # discouraged use _
-        self.connected = False
+        self.__data = {}
+        self.__connected = False
         
         sio.on('JOINED', self.__joined)
         sio.on('UPDATE', self.__update)
         sio.connect(url)
         
-        sio.emit('JOIN', {'room': self.room})
+        sio.emit('JOIN', {'room': self.__room})
         for i in range(5):
             time.sleep(1)
-            if(self.connected):
+            if(self.__connected):
                 return
         print("Joining room failed, closing connection")
         sio.disconnect()
 
-
     @property
     def data(self):
-        return self._data
+        return self.__data
+
+    def get_room(self):
+        return self.__room
 
     def set(self, key, value):
-        sio.emit('SET', {'room':self.room, 'key':key, 'value':value})
+        sio.emit('SET', {'room':self.__room, 'key':key, 'value':value})
 
     def __joined(self, data):
         self.log("JOINED RESPONSE: " + str(data))
-        self._data = data
-        self.connected = True
+        self.__data = data
+        self.__connected = True
 
     def __update(self, data):
         self.log("UPDATE RESPONSE: " + str(data))
         for key in data:
-            self._data[key] = data[key]
+            self.__data[key] = data[key]
     
     def __generate(self, url):
         return urllib.request.urlopen(url + "/api/generateroom").read().decode('UTF-8')
