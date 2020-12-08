@@ -1,5 +1,4 @@
-from flask import Flask, request
-from flask import render_template
+from flask import Flask, request, flash, redirect, url_for, render_template
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
 
 from user_agents import parse
@@ -10,6 +9,7 @@ app = Flask(__name__)
 app.config.update(
     TEMPLATES_AUTO_RELOAD = True,
 )
+app.secret_key = b'1'
 
 # initialize socketio
 socketio = SocketIO(app)
@@ -33,13 +33,14 @@ def generateroom():
     ROOMS[room] = {}
     return room
 
+@app.route('/r/', defaults={'room': ''})
 @app.route('/r/<path:room>')
 def room(room):
-    # do room logic here
-    # return html render if from browser
-    # maybe return true bool for programatic connections to room
-    
-    return render_template('room.html', room=room, metadata=metadata)
+    if room not in ROOMS:
+        flash('Invalid room code')
+        return redirect(url_for('index'))
+    else:
+        return render_template('room.html', room=room, metadata=metadata)
 
 # Handler for a message recieved over 'connect' channel
 @socketio.on('connect')
