@@ -7,7 +7,9 @@
             <div class="input-group" style="width: 50%; margin: auto;">
                 <input class="form-control" value="{{ room }}" type="text" id="room" style="font-weight: bold;" readonly>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button"><img src="../static/icons/clipboard.svg" height="100%"></button>
+                    <button id="copy-button" class="btn btn-outline-secondary" data-clipboard-target="#room" type="button">
+                        <img src="../static/icons/clipboard.svg" class="copyimage" alt="Copy to clipboard">
+                    </button>
                 </div>
             </div>
             <small id="codeHelp" class="form-text">Room URL code.</small>
@@ -28,9 +30,11 @@
                 </tbody>
             </table>      
             <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
             <script src="../static/scripts/networking.js"></script>
             <script src="../static/scripts/initialize.js"></script>
             <script src="../static/scripts/sorttable.js"></script>
+            <script src="../static/scripts/clipboard.js"></script>
         </div>
         <div class="col-1 col-sm-2 col-lg-3"></div>
     </div>
