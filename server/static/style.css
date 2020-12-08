@@ -126,8 +126,8 @@ footer {
 
 .header {
     font-size: 80px;
+    margin: 30px;
     color: white;
-    margin: auto;
     text-decoration: none;
 }
 
@@ -259,4 +259,10 @@ footer {
 
 .copyimage {
   height: 100%;
+}
+
+@media (min-width: 992px) {
+  .navbar {
+      height: 110px;
+  }
 }
