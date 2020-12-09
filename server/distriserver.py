@@ -68,18 +68,28 @@ def disconnect():
     else:
         metadata['browser'] -= 1
     metadata['count'] -= 1
+    for room in ROOMS:
+        if(request.sid in ROOMS[room].connected_users):
+            ROOMS[room].connected_users.remove(request.sid)
+            emit('STATS', {'connections':len(ROOMS[room].connected_users)}, room=room)
 
 @socketio.on('JOIN')
 def on_join(data):
     room = data['room']
     if room in ROOMS:
         join_room(room)
-        emit('JOINED', ROOMS[room].data, room=request.sid) # send response with room dict back to client
+        ROOMS[room].connected_users.append(request.sid)
+        emit('STATS', {'connections':len(ROOMS[room].connected_users)}, room=room)
 
 @socketio.on('leave')
 def on_leave(data):
+    """
+    this method essentially never runs
+    """
     room = data['room']
     leave_room(room)
+    print(room, "LEAVE FIRED!!!!!!!")
+    
 
 @socketio.on('SET')
 def setvalue(data):
@@ -93,9 +103,7 @@ def setvalue(data):
 ROOMS = {}
 class Room:
     def __init__(self):
-        self.connections = 0
-        self.browser = 0
-        self.python = 0
+        self.connected_users = []
         self.data = {}
 
 if __name__ == '__main__':

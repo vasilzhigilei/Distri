@@ -14,6 +14,11 @@ socket.on('UPDATE', function(data) {
     setTable();
 });
 
+socket.on('STATS', function(data) {
+    document.getElementById('connections').innerText = data['connections'];
+});
+
+
 // helper function to check if obj is empty
 function isEmpty(obj) {
     for(var key in obj) {

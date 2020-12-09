@@ -28,14 +28,26 @@
                         <td></td>
                     </tr>
                 </tbody>
-            </table>      
-            <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
-            <script src="../static/scripts/networking.js"></script>
-            <script src="../static/scripts/initialize.js"></script>
-            <script src="../static/scripts/sorttable.js"></script>
-            <script src="../static/scripts/clipboard.js"></script>
+            </table>
+            <br>  
+            <div class="mini-spacer" style="width: 100%;"></div> <!-- mini-spacer -->
+            <br>
+            <div class="metainfo bg-whiteopacity">
+                <span class="metatext">
+                    Total Room Views &mdash;
+                </span>
+                <div class="iconcontainer" data-toggle="tooltip" title="Total Connections">
+                    <img src="../static/icons/people.svg" class="icon">
+                    <span class="metatext" id="connections">0</span>
+                </div>
+            </div>
         </div>
         <div class="col-0 col-lg-2 col-xl-3"></div>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+    <script src="../static/scripts/networking.js"></script>
+    <script src="../static/scripts/initialize.js"></script>
+    <script src="../static/scripts/sorttable.js"></script>
+    <script src="../static/scripts/clipboard.js"></script>
 {% endblock %}
