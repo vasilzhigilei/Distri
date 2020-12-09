@@ -27,6 +27,9 @@ class DistriClient:
         print("Joining room failed, closing connection")
         sio.disconnect()
 
+    def __str__(self):
+        return self.__room + " " + str(self.__data)
+
     @property
     def data(self):
         return self.__data
