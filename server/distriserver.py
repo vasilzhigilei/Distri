@@ -78,6 +78,7 @@ def on_join(data):
     room = data['room']
     if room in ROOMS:
         join_room(room)
+        emit('JOINED', ROOMS[room].data, room=request.sid) # send response with room dict back to client
         ROOMS[room].connected_users.append(request.sid)
         emit('STATS', {'connections':len(ROOMS[room].connected_users)}, room=room)
 

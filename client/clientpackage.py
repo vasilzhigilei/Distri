@@ -4,7 +4,7 @@ import time
 
 class DistriClient:
     global sio
-    sio = socketio.Client()
+    sio = socketio.Client() # logger=True, engineio_logger=True
     def __init__(self, url, room="", debug=False):
         self.url = url
         if room == "":
