@@ -18,6 +18,11 @@ socket.on('STATS', function(data) {
     document.getElementById('connections').innerText = data['connections'];
 });
 
+socket.on('SITEWIDE STATS', function(data) {
+    document.getElementById('sitewide_connections').innerText = data['count']
+    document.getElementById('sitewide_browser').innerText = data['browser']
+    document.getElementById('sitewide_python').innerText = data['python']
+});
 
 // helper function to check if obj is empty
 function isEmpty(obj) {

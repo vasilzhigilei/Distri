@@ -1,6 +1,7 @@
 from flask import Flask, request, flash, redirect, url_for, render_template
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
-
+from threading import Lock
+from threading import Timer
 from user_agents import parse
 import secrets
 
@@ -10,7 +11,8 @@ app.config.update(
     TEMPLATES_AUTO_RELOAD = True,
 )
 app.secret_key = b'1'
-
+thread = None
+thread_lock = Lock() # thread starts at bottom of file
 # initialize socketio
 socketio = SocketIO(app)
 socketio.init_app(app, cors_allowed_origins="*")
@@ -18,6 +20,12 @@ socketio.init_app(app, cors_allowed_origins="*")
 metadata = {'count':0,'browser':0,'python':0,'unknown':0}
 
 # note to self: add live every 5 second emit sitewide connections
+
+def update_sitewide_stats():
+    while(True):
+        socketio.sleep(5) # every 5 seconds output sitewide stats
+        socketio.emit('SITEWIDE STATS', metadata) # broadcast
+
 
 @app.route('/')
 @app.route('/index')
@@ -56,6 +64,10 @@ def connect():
     metadata['count'] += 1
     print(metadata)
     print('Connected client #' + str(metadata['count']) + ': ' + request.sid)
+    global thread
+    with thread_lock:
+        if thread is None:
+            thread = socketio.start_background_task(target=update_sitewide_stats)
 
 @socketio.on('disconnect')
 def disconnect():
@@ -95,6 +107,7 @@ def on_leave(data):
 @socketio.on('SET')
 def setvalue(data):
     room = data['room']
+    # if not in room do redirect here and disconnect client
     key = data['key']
     value = data['value']
     ROOMS[room].data[key] = value #keyerror here if room doesn't exist
