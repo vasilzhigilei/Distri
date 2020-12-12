@@ -14,14 +14,19 @@ socket.on('UPDATE', function(data) {
     setTable();
 });
 
-socket.on('STATS', function(data) {
-    document.getElementById('connections').innerText = data['connections'];
+socket.on('ROOM_STATS', function(data) {
+    document.getElementById('room_connections').innerText = data['connections'];
+    document.getElementById('room_browser').innerText = data['browser'];
+    document.getElementById('room_python').innerText = data['python'];
 });
 
-socket.on('SITEWIDE STATS', function(data) {
-    document.getElementById('sitewide_connections').innerText = data['count']
+socket.on('SITEWIDE_STATS', function(data) {
+    document.getElementById('sitewide_connections').innerText = data['connections']
     document.getElementById('sitewide_browser').innerText = data['browser']
     document.getElementById('sitewide_python').innerText = data['python']
+    var d = new Date();
+    var n = d.toLocaleTimeString();
+    document.getElementById('sitewide_time').innerText = n; // should theoretically come from server to be accurate, but this will do
 });
 
 // helper function to check if obj is empty

@@ -17,14 +17,14 @@ thread_lock = Lock() # thread starts at bottom of file
 socketio = SocketIO(app)
 socketio.init_app(app, cors_allowed_origins="*")
 
-metadata = {'count':0,'browser':0,'python':0,'unknown':0}
+metadata = {'connections':0,'browser':0,'python':0,'unknown':0}
 
 # note to self: add live every 5 second emit sitewide connections
 
 def update_sitewide_stats():
     while(True):
         socketio.sleep(5) # every 5 seconds output sitewide stats
-        socketio.emit('SITEWIDE STATS', metadata) # broadcast
+        socketio.emit('SITEWIDE_STATS', metadata) # broadcast
 
 
 @app.route('/')
@@ -61,9 +61,9 @@ def connect():
         metadata['browser'] += 1
         #in the future, add unknown, and do checks if really browser
         #print(user_agent.is_mobile, user_agent.is_pc, user_agent.is_bot)
-    metadata['count'] += 1
+    metadata['connections'] += 1
     print(metadata)
-    print('Connected client #' + str(metadata['count']) + ': ' + request.sid)
+    print('Connected client #' + str(metadata['connections']) + ': ' + request.sid)
     global thread
     with thread_lock:
         if thread is None:
@@ -71,7 +71,7 @@ def connect():
 
 @socketio.on('disconnect')
 def disconnect():
-    print('Disconnected client #' + str(metadata['count']) + ': ' + request.sid)
+    print('Disconnected client #' + str(metadata['connections']) + ': ' + request.sid)
     user_agent = parse(request.headers.get('User-Agent'))
     browser = user_agent.browser.family
     os = user_agent.os.family
@@ -79,11 +79,18 @@ def disconnect():
         metadata['python'] -= 1
     else:
         metadata['browser'] -= 1
-    metadata['count'] -= 1
+    metadata['connections'] -= 1
     for room in ROOMS:
         if(request.sid in ROOMS[room].connected_users):
             ROOMS[room].connected_users.remove(request.sid)
-            emit('STATS', {'connections':len(ROOMS[room].connected_users)}, room=room)
+            if request.sid in ROOMS[room].browser_users:
+                ROOMS[room].browser_users.remove(request.sid)
+            if request.sid in ROOMS[room].python_users:
+                ROOMS[room].python_users.remove(request.sid)
+            data = {'connections':len(ROOMS[room].connected_users),
+                    'browser':len(ROOMS[room].browser_users),
+                    'python':len(ROOMS[room].python_users)}
+            emit('ROOM_STATS', data, room=room)
 
 @socketio.on('JOIN')
 def on_join(data):
@@ -92,7 +99,16 @@ def on_join(data):
         join_room(room)
         emit('JOINED', ROOMS[room].data, room=request.sid) # send response with room dict back to client
         ROOMS[room].connected_users.append(request.sid)
-        emit('STATS', {'connections':len(ROOMS[room].connected_users)}, room=room)
+        user_agent = parse(request.headers.get('User-Agent'))
+        browser = user_agent.browser.family
+        if browser == "Python Requests":
+            ROOMS[room].python_users.append(request.sid)
+        else:
+            ROOMS[room].browser_users.append(request.sid)
+        data = {'connections':len(ROOMS[room].connected_users),
+                'browser':len(ROOMS[room].browser_users),
+                'python':len(ROOMS[room].python_users)}
+        emit('ROOM_STATS', data, room=room)
 
 @socketio.on('leave')
 def on_leave(data):
@@ -118,6 +134,8 @@ ROOMS = {}
 class Room:
     def __init__(self):
         self.connected_users = []
+        self.browser_users = []
+        self.python_users = []
         self.data = {}
 
 if __name__ == '__main__':
