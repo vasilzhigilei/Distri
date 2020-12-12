@@ -24,9 +24,8 @@ socket.on('SITEWIDE_STATS', function(data) {
     document.getElementById('sitewide_connections').innerText = data['connections']
     document.getElementById('sitewide_browser').innerText = data['browser']
     document.getElementById('sitewide_python').innerText = data['python']
-    var d = new Date();
-    var n = d.toLocaleTimeString();
-    document.getElementById('sitewide_time').innerText = n; // should theoretically come from server to be accurate, but this will do
+    var d = new Date().toLocaleTimeString('en-us',{timeZoneName:'short'})
+    document.getElementById('sitewide_time').innerText = d; // should theoretically come from server to be accurate, but this will do
 });
 
 // helper function to check if obj is empty
