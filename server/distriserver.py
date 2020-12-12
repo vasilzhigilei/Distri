@@ -4,7 +4,7 @@ from threading import Lock
 from threading import Timer
 from user_agents import parse
 import secrets
-
+import time
 # initialize Flask app
 app = Flask(__name__)
 app.config.update(
@@ -30,7 +30,7 @@ def update_sitewide_stats():
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', metadata=metadata)
+    return render_template('index.html', metadata=metadata, time=time.strftime('%I:%M:%S %p'))
 
 @app.route('/api/generateroom')
 def generateroom():
@@ -48,7 +48,7 @@ def room(room):
         flash('Invalid room code')
         return redirect(url_for('index'))
     else:
-        return render_template('room.html', room=room, metadata=metadata)
+        return render_template('room.html', room=room, metadata=metadata, time=time.strftime('%I:%M:%S %p'))
 
 # Handler for a message recieved over 'connect' channel
 @socketio.on('connect')
