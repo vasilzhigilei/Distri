@@ -48,3 +48,16 @@ function setTable(){
         document.getElementById("tbody").innerHTML = tbody;
     }
 }
+
+function SET() {
+    var key = document.getElementById('keyInput').value;
+    var value = document.getElementById('valueInput').value;
+    socket.emit('SET', {'room': room, 'key':key, 'value':value});
+}
+
+function detect_enter_keyboard(event) {
+    var key_board_keycode = event.which || event.keyCode;
+    if(key_board_keycode == 13){
+        SET();
+    }
+}
