@@ -32,14 +32,16 @@ def update_sitewide_stats():
 def index():
     return render_template('index.html', metadata=metadata, time=time.strftime('%-I:%M:%S %p %Z'))
 
-@app.route('/api/generateroom')
-def generateroom(editable):
+@app.route('/api/generateroom/', defaults={'view_only': 'false'})
+@app.route('/api/generateroom/<path:view_only>')
+def generateroom(view_only):
     """
     Generates a new room
     """
     room = secrets.token_urlsafe(6)
     ROOMS[room] = Room()
-    ROOMS[room].browser_editable = editable
+    if view_only == 'true':
+        ROOMS[room].browser_view_only = True
     return room
 
 @app.route('/r/', defaults={'room': ''})
@@ -49,7 +51,7 @@ def room(room):
         flash('Invalid room code')
         return redirect(url_for('index'))
     else:
-        return render_template('room.html', room=room, metadata=metadata, time=time.strftime('%-I:%M:%S %p %Z'))
+        return render_template('room.html', room=room, view_only=ROOMS[room].browser_view_only, metadata=metadata, time=time.strftime('%-I:%M:%S %p %Z'))
 
 # Handler for a message recieved over 'connect' channel
 @socketio.on('connect')
@@ -138,7 +140,7 @@ class Room:
         self.connected_users = []
         self.browser_users = []
         self.python_users = []
-        self.browser_editable = True
+        self.browser_view_only = False
         self.data = {}
 
 if __name__ == '__main__':

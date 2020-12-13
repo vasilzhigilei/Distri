@@ -1,5 +1,7 @@
 function generate(){
-    fetch("/api/generateroom").then(function(response) {
+    var viewOnly = document.getElementById('viewOnly').checked;
+    console.log(viewOnly)
+    fetch("/api/generateroom/" + viewOnly.toString()).then(function(response) {
         response.text().then(function(text) {
             redirect(text);
         });
