@@ -33,6 +33,23 @@
                     </tr>
                 </tbody>
             </table>
+            <form>
+                    <div class="form-group" style="width: 33%; float: left;">
+                        <input type="text" id="keyInput" class="roominput form-control" aria-describedby="keyInputHelp" placeholder="Key"
+                            onkeypress="detect_enter_keyboard(event)">
+                    </div>
+                    <div class="form-group" style="width: 67%; float: left;">
+                        <input type="text" id="valueInput" class="roominput form-control" aria-describedby="valueInputHelp" placeholder="Value"
+                            onkeypress="detect_enter_keyboard(event)">
+                    </div>
+                <div class="buttoncontainer" onclick="redirect(document.getElementById('code').value)">
+                    <button type="button" class="indexbutton">
+                        SET
+                        <div class="fill fill-two"></div>
+                    </button>
+                </div>
+                <small id="codeHelp" class="form-text">Create or Update Data</small>
+            </form>
             <br>  
             <div class="mini-spacer" style="width: 100%;"></div> <!-- mini-spacer -->
             <br>

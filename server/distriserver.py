@@ -33,12 +33,13 @@ def index():
     return render_template('index.html', metadata=metadata, time=time.strftime('%-I:%M:%S %p %Z'))
 
 @app.route('/api/generateroom')
-def generateroom():
+def generateroom(editable):
     """
     Generates a new room
     """
-    room = secrets.token_urlsafe(4)
+    room = secrets.token_urlsafe(6)
     ROOMS[room] = Room()
+    ROOMS[room].browser_editable = editable
     return room
 
 @app.route('/r/', defaults={'room': ''})
@@ -136,6 +137,7 @@ class Room:
         self.connected_users = []
         self.browser_users = []
         self.python_users = []
+        self.browser_editable = True
         self.data = {}
 
 if __name__ == '__main__':

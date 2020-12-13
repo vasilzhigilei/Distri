@@ -138,7 +138,7 @@ footer {
 
 .content-table {
     border-collapse: collapse;
-    margin: 10px 0;
+    margin: 10px 0 0 0;
     font-size: 0.9em;
     width: 100%;
     border-radius: 5px 5px 0 0;
@@ -183,6 +183,7 @@ footer {
     margin: 0 auto;
     cursor: pointer;
     z-index: 10;
+    clear: both;
   }
   
   .indexbutton {
@@ -265,4 +266,32 @@ footer {
   .navbar {
       height: 110px;
   }
+}
+
+.roominput {
+  color: white;
+  background-color: #009C75;
+  border-style: solid;
+  border-color: #009C75;
+  border-radius: 0;
+}
+
+.roominput:focus {
+  background-color: #009C75;
+  border-color: rgb(238, 238, 238);
+  box-shadow: none;
+  color: white;
+}
+
+.roominput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(238, 238, 238);
+  opacity: 1; /* Firefox */
+}
+
+.roominput:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgb(238, 238, 238);
+}
+
+.roominput::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgb(238, 238, 238);
 }
