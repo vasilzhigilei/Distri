@@ -127,8 +127,9 @@ def setvalue(data):
     # if not in room do redirect here and disconnect client
     key = data['key']
     value = data['value']
-    ROOMS[room].data[key] = value #keyerror here if room doesn't exist
-    emit('UPDATE', {key:value}, room=room)
+    if key != "": # error message handled client side to avoid redirect here
+        ROOMS[room].data[key] = value #keyerror here if room doesn't exist
+        emit('UPDATE', {key:value}, room=room)
 
 # ROOM CLASS
 ROOMS = {}

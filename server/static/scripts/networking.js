@@ -52,7 +52,11 @@ function setTable(){
 function SET() {
     var key = document.getElementById('keyInput').value;
     var value = document.getElementById('valueInput').value;
-    socket.emit('SET', {'room': room, 'key':key, 'value':value});
+    if(key == ""){
+        Form.reportValidity();
+    }else{
+        socket.emit('SET', {'room': room, 'key':key, 'value':value});
+    }
 }
 
 function detect_enter_keyboard(event) {
