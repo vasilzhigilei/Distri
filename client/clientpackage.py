@@ -19,6 +19,8 @@ class DistriClient:
         
         sio.on('JOINED', self.__joined)
         sio.on('UPDATE', self.__update)
+        sio.on('ROOM_STATS', self.__update_room_stats)
+        sio.on('SITEWIDE_STATS', self.__update_sitewide_stats)
         sio.connect(url)
         
         sio.emit('JOIN', {'room': self.__room})
@@ -39,10 +41,10 @@ class DistriClient:
     def get_room(self):
         return self.__room
 
-    def get_room_stats():
+    def get_room_stats(self):
         return self.__room_stats
 
-    def get_sitewide_stats():
+    def get_sitewide_stats(self):
         return self.__sitewide_stats
 
     def set(self, key, value):
@@ -58,6 +60,16 @@ class DistriClient:
         for key in data:
             self.__data[key] = data[key]
     
+    def __update_room_stats(self, data):
+        self.log("ROOM STATS: " + str(data))
+        for key in data:
+            self.__room_stats[key] = data[key]
+    
+    def __update_sitewide_stats(self, data):
+        self.log("SITEWIDE STATS: " + str(data))
+        for key in data:
+            self.__sitewide_stats[key] = data[key]
+
     def __generate(self, url):
         return urllib.request.urlopen(url + "/api/generateroom").read().decode('UTF-8')
 
