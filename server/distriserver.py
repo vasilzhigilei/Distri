@@ -77,7 +77,6 @@ def disconnect():
     print('Disconnected client #' + str(metadata['connections']) + ': ' + request.sid)
     user_agent = parse(request.headers.get('User-Agent'))
     browser = user_agent.browser.family
-    os = user_agent.os.family
     if browser == "Python Requests":
         metadata['python'] -= 1
     else:

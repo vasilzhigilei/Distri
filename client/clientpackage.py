@@ -13,6 +13,8 @@ class DistriClient:
             self.__room = room
         self.DEBUG = debug
         self.__data = {}
+        self.__room_stats = {}
+        self.__sitewide_stats = {}
         self.__connected = False
         
         sio.on('JOINED', self.__joined)
@@ -36,6 +38,12 @@ class DistriClient:
 
     def get_room(self):
         return self.__room
+
+    def get_room_stats():
+        return self.__room_stats
+
+    def get_sitewide_stats():
+        return self.__sitewide_stats
 
     def set(self, key, value):
         sio.emit('SET', {'room':self.__room, 'key':key, 'value':value})
