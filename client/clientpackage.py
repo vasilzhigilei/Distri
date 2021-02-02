@@ -3,6 +3,9 @@ import urllib.request
 import time
 
 class DistriClient:
+    """
+    DistriCLient Package
+    """
     global sio
     sio = socketio.Client() # logger=True, engineio_logger=True
     def __init__(self, url, room="", debug=False):
