@@ -28,14 +28,27 @@ client.get_room_stats()
 # Distri real-time* sitewide statistics (*5s intervals)
 client.get_sitewide_stats()
 
-# Set key-value pair in dictionary, overwrites current pair if exists
+# Set key-value pair in Distri dictionary, overwrites current pair if exists
 client.set(key="MY KEY", value="MY VALUE")
 ```
 All data is real-time, client.get_* functions access local copies, which are automatically force-updated by server emits.
 
 ## Browser Access (and what this all looks like in action)
 ![Front Home Page Browser View (frontpage.png)](./metaresources/frontpage.png)
-<h6 align="center"><i>[Front Home Page Browser View]</i></h6>
+<h6 align="center"><i>[Front home page browser view.]</i></h6>
+
+![Room Page Browser View (copylink.png)](./metaresources/copylink.png)
+<h6 align="center"><i>[After generating a room, copying the link.]</i></h6>
+
+![Python client connected Visual Studio Code view (clientconnected.png)](./metaresources/clientconnected.png)
+<h6 align="center"><i>[Pasting room code into our clienttest.py (which imports & utilizes the Distri clientpackage.py) and running clienttest.py.]</i></h6>
+<h6 align="center"><i>[We can see the client (LEFT TERMINAL) receive the empty dictionary, room stats, and sitewide stats. Server (RIGHT TERMINAL) shows our new client, visible as the new python client (change from 0 to 1 python connections on Distri).]</i></h6>
+
+![Room Page Browser View Set Key Value Pair (setbrowserside.png)](./metaresources/setbrowserside.png)
+<h6 align="center"><i>[Set a key-value pair through browser client as test.]</i></h6>
+
+![Python client update data Visual Studio Code view (updateclient.png)](./metaresources/updateclient.png)
+<h6 align="center"><i>[clienttest.py receives new data, updating local dict. With DistriClient init param debug set to True, prints the update response in terminal.]</i></h6>
 
 ## What is the use of Distri?
 Imagine you quickly wrote a script to do something. Let's say you wish to bruteforce an HTML form 10000 times guessing a number 0-9999. You can send your script to your friend, and tell them "I'll do 0-4999, you do 5000-9999". But what if a third friend joins? What if you don't know these people and can't easily communicate quickly? 
