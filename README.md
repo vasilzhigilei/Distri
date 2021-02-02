@@ -37,24 +37,29 @@ All data is real-time, client.get_* functions access local copies, which are aut
 <span align="center">
   
 ![Front Home Page Browser View (frontpage.png)](./metaresources/frontpage.png)
+<br>
 <i>[Front home page browser view.]</i>
 <br>
 <br>
 ![Room Page Browser View (copylink.png)](./metaresources/copylink.png)
+<br>
 <i>[After generating a room, copying the link.]</i>
 <br>
 <br>
 ![Python client connected Visual Studio Code view (clientconnected.png)](./metaresources/clientconnected.png)
+<br>
 <i>[Pasting room code into our clienttest.py (which imports & utilizes the Distri clientpackage.py) and running clienttest.py.]</i>
 <br>
 <i>[We can see the client (LEFT TERMINAL) receive the empty dictionary, room stats, and sitewide stats. Server (RIGHT TERMINAL) shows our new client, visible as the new python client (change from 0 to 1 python connections on Distri).]</i>
 <br>
 <br>
 ![Room Page Browser View Set Key Value Pair (setbrowserside.png)](./metaresources/setbrowserside.png)
+<br>
 <i>[Set a key-value pair through browser client as test.]</i>
 <br>
 <br>
 ![Python client update data Visual Studio Code view (updateclient.png)](./metaresources/updateclient.png)
+<br>
 <i>[clienttest.py receives new data, updating local dict. With DistriClient init param debug set to True, prints the update response in terminal.]</i>
 <br>
 <br>
