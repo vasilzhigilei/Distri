@@ -1,4 +1,5 @@
-# Distri
+<img src="https://raw.githubusercontent.com/vasilzhigilei/Distri/main/server/static/distri.png" alt="Distri logo (distri.png)" width="150px">
+
 ### Quick &amp; lightweight distributed computing service
 
 Distri is essentially a dictionary (or map) which is accessible via persistent client <-> server connections. This dictionary is, in other words, "more global than global".
